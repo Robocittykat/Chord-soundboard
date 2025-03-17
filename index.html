@@ -1,108 +1,120 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<style>
+			.soundboard{
+				width: 75px;
+				height: 75px;
+				background-color: lightGray;
+				font-family: times;
+			}
+			.soundboard.checker{
+				background-color: darkGray;
+			}
+		</style>
 	</head>
 	<body>
 		<table>
 			<tr>
-				<td><button onclick="playChord('C#','maj',4)">C#maj</button></td>
-				<td><button onclick="playChord('C','maj',4)">Cmaj</button></td>
-				<td><button onclick="playChord('D','maj',4)">Dmaj</button></td>
-				<td><button onclick="playChord('D#','maj',4)">D#maj</button></td>
-				<td><button onclick="playChord('E','maj',4)">Emaj</button></td>
-				<td><button onclick="playChord('F','maj',4)">Fmaj</button></td>
-				<td><button onclick="playChord('F#','maj',4)">F#maj</button></td>
-				<td><button onclick="playChord('G','maj',4)">Gmaj</button></td>
-				<td><button onclick="playChord('G#','maj',4)">G#maj</button></td>
-				<td><button onclick="playChord('A','maj',4)">Amaj</button></td>
-				<td><button onclick="playChord('A#','maj',4)">A#maj</button></td>
-				<td><button onclick="playChord('B','maj',4)">Bmaj</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('C','maj',4)">Cmaj</button></td>
+				<td><button class="soundboard" onmousedown="playChord('C#','maj',4)">C♯maj<br>D♭maj</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('D','maj',4)">Dmaj</button></td>
+				<td><button class="soundboard" onmousedown="playChord('D#','maj',4)">D♯maj<br>E♭maj</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('E','maj',4)">Emaj</button></td>
+				<td><button class="soundboard" onmousedown="playChord('F','maj',4)">Fmaj</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('F#','maj',4)">F♯maj<br>G♭maj</button></td>
+				<td><button class="soundboard" onmousedown="playChord('G','maj',4)">Gmaj</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('G#','maj',4)">G♯maj<br>A♭maj</button></td>
+				<td><button class="soundboard" onmousedown="playChord('A','maj',4)">Amaj</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('A#','maj',4)">A♯maj<br>B♭maj</button></td>
+				<td><button class="soundboard" onmousedown="playChord('B','maj',4)">Bmaj</button></td>
 			</tr>
 			<tr>
-				<td><button onclick="playChord('C','min',4)">Cmin</button></td>
-				<td><button onclick="playChord('C#','min',4)">C#min</button></td>
-				<td><button onclick="playChord('D','min',4)">Dmin</button></td>
-				<td><button onclick="playChord('D#','min',4)">D#min</button></td>
-				<td><button onclick="playChord('E','min',4)">Emin</button></td>
-				<td><button onclick="playChord('F','min',4)">Fmin</button></td>
-				<td><button onclick="playChord('F#','min',4)">F#min</button></td>
-				<td><button onclick="playChord('G','min',4)">Gmin</button></td>
-				<td><button onclick="playChord('G#','min',4)">G#min</button></td>
-				<td><button onclick="playChord('A','min',4)">Amin</button></td>
-				<td><button onclick="playChord('A#','min',4)">A#min</button></td>
-				<td><button onclick="playChord('B','min',4)">Bmin</button></td>
+				<td><button class="soundboard" onmousedown="playChord('C','min',4)">Cmin</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('C#','min',4)">C♯min<br>D♭min</button></td>
+				<td><button class="soundboard" onmousedown="playChord('D','min',4)">Dmin</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('D#','min',4)">D♯min<br>E♭min</button></td>
+				<td><button class="soundboard" onmousedown="playChord('E','min',4)">Emin</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('F','min',4)">Fmin</button></td>
+				<td><button class="soundboard" onmousedown="playChord('F#','min',4)">F♯min<br>G♭min</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('G','min',4)">Gmin</button></td>
+				<td><button class="soundboard" onmousedown="playChord('G#','min',4)">G♯min<br>G♭min</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('A','min',4)">Amin</button></td>
+				<td><button class="soundboard" onmousedown="playChord('A#','min',4)">A♯min<br>B♭min</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('B','min',4)">Bmin</button></td>
 			</tr>
 			<tr>
-				<td><button onclick="playChord('C','7',4)">C7</button></td>
-				<td><button onclick="playChord('C#','7',4)">C#7</button></td>
-				<td><button onclick="playChord('D','7',4)">D7</button></td>
-				<td><button onclick="playChord('D#','7',4)">D#7</button></td>
-				<td><button onclick="playChord('E','7',4)">E7</button></td>
-				<td><button onclick="playChord('F','7',4)">F7</button></td>
-				<td><button onclick="playChord('F#','7',4)">F#7</button></td>
-				<td><button onclick="playChord('G','7',4)">G7</button></td>
-				<td><button onclick="playChord('G#','7',4)">G#7</button></td>
-				<td><button onclick="playChord('A','7',4)">A7</button></td>
-				<td><button onclick="playChord('A#','7',4)">A#7</button></td>
-				<td><button onclick="playChord('B','7',4)">B7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('C','7',4)">C7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('C#','7',4)">C♯7<br>D♭7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('D','7',4)">D7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('D#','7',4)">D♯7<br>E♭7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('E','7',4)">E7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('F','7',4)">F7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('F#','7',4)">F♯7<br>G♭7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('G','7',4)">G7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('G#','7',4)">G♯7<br>A♭7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('A','7',4)">A7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('A#','7',4)">A♯7<br>B♭7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('B','7',4)">B7</button></td>
 			</tr>
 			<tr>
-				<td><button onclick="playChord('C','M7',4)">CM7</button></td>
-				<td><button onclick="playChord('C#','M7',4)">C#M7</button></td>
-				<td><button onclick="playChord('D','M7',4)">DM7</button></td>
-				<td><button onclick="playChord('D#','M7',4)">D#M7</button></td>
-				<td><button onclick="playChord('E','M7',4)">EM7</button></td>
-				<td><button onclick="playChord('F','M7',4)">FM7</button></td>
-				<td><button onclick="playChord('F#','M7',4)">F#M7</button></td>
-				<td><button onclick="playChord('G','M7',4)">GM7</button></td>
-				<td><button onclick="playChord('G#','M7',4)">G#M7</button></td>
-				<td><button onclick="playChord('A','M7',4)">AM7</button></td>
-				<td><button onclick="playChord('A#','M7',4)">A#M7</button></td>
-				<td><button onclick="playChord('B','M7',4)">BM7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('C','M7',4)">CM7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('C#','M7',4)">C♯M7<br>D♭M7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('D','M7',4)">DM7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('D#','M7',4)">D♯M7<br>E♭M7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('E','M7',4)">EM7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('F','M7',4)">FM7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('F#','M7',4)">F♯M7<br>G♭M7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('G','M7',4)">GM7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('G#','M7',4)">G♯M7<br>A♭M7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('A','M7',4)">AM7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('A#','M7',4)">A♯M7<br>B♭M7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('B','M7',4)">BM7</button></td>
 			</tr>
 			<tr>
-				<td><button onclick="playChord('C','m7',4)">Cm7</button></td>
-				<td><button onclick="playChord('C#','m7',4)">C#m7</button></td>
-				<td><button onclick="playChord('D','m7',4)">Dm7</button></td>
-				<td><button onclick="playChord('D#','m7',4)">D#m7</button></td>
-				<td><button onclick="playChord('E','m7',4)">Em7</button></td>
-				<td><button onclick="playChord('F','m7',4)">Fm7</button></td>
-				<td><button onclick="playChord('F#','m7',4)">F#m7</button></td>
-				<td><button onclick="playChord('G','m7',4)">Gm7</button></td>
-				<td><button onclick="playChord('G#','m7',4)">G#m7</button></td>
-				<td><button onclick="playChord('A','m7',4)">Am7</button></td>
-				<td><button onclick="playChord('A#','m7',4)">A#m7</button></td>
-				<td><button onclick="playChord('B','m7',4)">Bm7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('C','m7',4)">Cm7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('C#','m7',4)">C♯m7<br>D♭m7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('D','m7',4)">Dm7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('D#','m7',4)">D♯m7<br>E♭m7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('E','m7',4)">Em7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('F','m7',4)">Fm7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('F#','m7',4)">F♯m7<br>G♭m7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('G','m7',4)">Gm7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('G#','m7',4)">G♯m7<br>A♭m7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('A','m7',4)">Am7</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('A#','m7',4)">A♯m7<br>B♭m7</button></td>
+				<td><button class="soundboard" onmousedown="playChord('B','m7',4)">Bm7</button></td>
 			</tr>
 			<tr>
-				<td><button onclick="playChord('C','dim',4)">Cdim</button></td>
-				<td><button onclick="playChord('C#','dim',4)">C#dim</button></td>
-				<td><button onclick="playChord('D','dim',4)">Ddim</button></td>
-				<td><button onclick="playChord('D#','dim',4)">D#dim</button></td>
-				<td><button onclick="playChord('E','dim',4)">Edim</button></td>
-				<td><button onclick="playChord('F','dim',4)">Fdim</button></td>
-				<td><button onclick="playChord('F#','dim',4)">F#dim</button></td>
-				<td><button onclick="playChord('G','dim',4)">Gdim</button></td>
-				<td><button onclick="playChord('G#','dim',4)">G#dim</button></td>
-				<td><button onclick="playChord('A','dim',4)">Adim</button></td>
-				<td><button onclick="playChord('A#','dim',4)">A#dim</button></td>
-				<td><button onclick="playChord('B','dim',4)">Bdim</button></td>
+				<td><button class="soundboard" onmousedown="playChord('C','dim',4)">Cdim</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('C#','dim',4)">C♯dim<br>D♭dim</button></td>
+				<td><button class="soundboard" onmousedown="playChord('D','dim',4)">Ddim</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('D#','dim',4)">D♯dim<br>E♭dim</button></td>
+				<td><button class="soundboard" onmousedown="playChord('E','dim',4)">Edim</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('F','dim',4)">Fdim</button></td>
+				<td><button class="soundboard" onmousedown="playChord('F#','dim',4)">F♯dim<br>G♭dim</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('G','dim',4)">Gdim</button></td>
+				<td><button class="soundboard" onmousedown="playChord('G#','dim',4)">G♯dim<br>A♭dim</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('A','dim',4)">Adim</button></td>
+				<td><button class="soundboard" onmousedown="playChord('A#','dim',4)">A♯dim<br>B♭dim</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('B','dim',4)">Bdim</button></td>
 			</tr>
 			<tr>
-				<td><button onclick="playChord('C','sus',4)">Csus</button></td>
-				<td><button onclick="playChord('C#','sus',4)">C#sus</button></td>
-				<td><button onclick="playChord('D','sus',4)">Dsus</button></td>
-				<td><button onclick="playChord('D#','sus',4)">D#sus</button></td>
-				<td><button onclick="playChord('E','sus',4)">Esus</button></td>
-				<td><button onclick="playChord('F','sus',4)">Fsus</button></td>
-				<td><button onclick="playChord('F#','sus',4)">F#sus</button></td>
-				<td><button onclick="playChord('G','sus',4)">Gsus</button></td>
-				<td><button onclick="playChord('G#','sus',4)">G#sus</button></td>
-				<td><button onclick="playChord('A','sus',4)">Asus</button></td>
-				<td><button onclick="playChord('A#','sus',4)">A#sus</button></td>
-				<td><button onclick="playChord('B','sus',4)">Bsus</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('C','sus',4)">Csus</button></td>
+				<td><button class="soundboard" onmousedown="playChord('C#','sus',4)">C♯sus<br>D♭sus</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('D','sus',4)">Dsus</button></td>
+				<td><button class="soundboard" onmousedown="playChord('D#','sus',4)">D♯sus<br>E♭sus</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('E','sus',4)">Esus</button></td>
+				<td><button class="soundboard" onmousedown="playChord('F','sus',4)">Fsus</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('F#','sus',4)">F♯sus<br>G♭sus</button></td>
+				<td><button class="soundboard" onmousedown="playChord('G','sus',4)">Gsus</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('G#','sus',4)">G♯sus<br>A♭sus</button></td>
+				<td><button class="soundboard" onmousedown="playChord('A','sus',4)">Asus</button></td>
+				<td><button class="checker soundboard" onmousedown="playChord('A#','sus',4)">A♯sus<br>B♭sus</button></td>
+				<td><button class="soundboard" onmousedown="playChord('B','sus',4)">Bsus</button></td>
 			</tr>
 		</table>
+		<text>octave: <span id="octave">4</span></text><input id="octaveSlide" type="range" min="2" max="6" value="4">
 	</body>
 	<script src="audiosynth.js"></script>
 	<script src="main.js"></script>
