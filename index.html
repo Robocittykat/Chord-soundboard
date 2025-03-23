@@ -3,17 +3,40 @@
 	<head>
 		<style>
 			.soundboard{
-				width: 75px;
-				height: 75px;
+				width: 5vw;
+				height: 5vw;
 				background-color: lightGray;
 				font-family: times;
 			}
 			.soundboard.checker{
 				background-color: darkGray;
 			}
+			
+			#presets{
+				position: absolute;
+				left: 70vw;
+				background-color: lightGray;
+				top: 0;
+				width: 30vw;
+				overflow-y: scroll;
+				height: 100vh;
+			}
+			
+			.preset{
+				width: 100%;
+				height: 5vw;
+				background-color: lightGray;
+				font-family: times;
+			}
+			.preset.checker{
+				width: 100%;
+				height: 5vw;
+				background-color: darkGray;
+				font-family: times;
+			}
 		</style>
 	</head>
-	<body>
+	<body style="overflow-x: hidden;">
 		<table>
 			<tr>
 				<td><button class="checker soundboard" onmousedown="playChord('C','maj',4)">Cmaj</button></td>
@@ -115,6 +138,18 @@
 			</tr>
 		</table>
 		<text>octave: <span id="octave">4</span></text><input id="octaveSlide" type="range" min="2" max="6" value="4">
+		<div id="presets">
+			<button id="pre1" class="preset">Click here to assign a chord</button>
+			<button id="pre1" class="preset">Click here to assign a chord</button>
+			<button id="pre1" class="preset">Click here to assign a chord</button>
+			<button id="pre1" class="preset">Click here to assign a chord</button>
+			<button id="pre1" class="preset">Click here to assign a chord</button>
+			<button id="pre1" class="preset">Click here to assign a chord</button>
+			<button id="pre1" class="preset">Click here to assign a chord</button>
+			<button id="pre1" class="preset">Click here to assign a chord</button>
+			<button id="pre1" class="preset">Click here to assign a chord</button>
+			<button id="pre1" class="preset">Click here to assign a chord</button>
+		</div>
 	</body>
 	<script src="audiosynth.js"></script>
 	<script src="main.js"></script>
