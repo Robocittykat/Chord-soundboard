@@ -18,21 +18,73 @@
 				background-color: lightGray;
 				top: 0;
 				width: 30vw;
-				overflow-y: scroll;
 				height: 100vh;
 			}
 			
-			.preset{
+			.setpreset{
+				position: relative;
 				width: 100%;
-				height: 5vw;
+				height: 10vh;
+				background-color: lightGray;
+				font-family: times;
+			}
+			.setpreset.checker{
+				width: 100%;
+				height: 10vh;
+				background-color: darkGray;
+				font-family: times;
+			}
+			
+			.preset{
+				position: relative;
+				width: 80%;
+				height: 10vh;
 				background-color: lightGray;
 				font-family: times;
 			}
 			.preset.checker{
-				width: 100%;
-				height: 5vw;
 				background-color: darkGray;
-				font-family: times;
+			}
+			
+			#pre0{
+				top: 0%;
+				position: absolute;
+			}
+			#pre1{
+				top: 10%;
+				position: absolute;
+			}
+			#pre2{
+				top: 20%;
+				position: absolute;
+			}
+			#pre3{
+				top: 30%;
+				position: absolute;
+			}
+			#pre4{
+				top: 40%;
+				position: absolute;
+			}
+			#pre5{
+				top: 50%;
+				position: absolute;
+			}
+			#pre6{
+				top: 60%;
+				position: absolute;
+			}
+			#pre7{
+				top: 70%;
+				position: absolute;
+			}
+			#pre8{
+				top: 80%;
+				position: absolute;
+			}
+			#pre9{
+				top: 90%;
+				position: absolute;
 			}
 		</style>
 	</head>
@@ -138,19 +190,22 @@
 			</tr>
 		</table>
 		<text>octave: <span id="octave">4</span></text><input id="octaveSlide" type="range" min="2" max="6" value="4">
+		<text>keep notes in octave:</text><input type="checkbox" id="invertable">
+		<text>inversion: </text>
 		<div id="presets">
-			<button id="pre1" class="preset">Click here to assign a chord</button>
-			<button id="pre1" class="preset">Click here to assign a chord</button>
-			<button id="pre1" class="preset">Click here to assign a chord</button>
-			<button id="pre1" class="preset">Click here to assign a chord</button>
-			<button id="pre1" class="preset">Click here to assign a chord</button>
-			<button id="pre1" class="preset">Click here to assign a chord</button>
-			<button id="pre1" class="preset">Click here to assign a chord</button>
-			<button id="pre1" class="preset">Click here to assign a chord</button>
-			<button id="pre1" class="preset">Click here to assign a chord</button>
-			<button id="pre1" class="preset">Click here to assign a chord</button>
+			<div id="p0"><button id="pre0" class="preset" hidden></button><button id="setpre0" class="setpreset">Click here to assign a chord</button></div>
+			<div id="p1"><button id="pre1" class="preset checker" hidden></button><button id="setpre1" class="setpreset checker">Click here to assign a chord</button></div>
+			<div id="p2"><button id="pre2" class="preset" hidden></button><button id="setpre2" class="setpreset">Click here to assign a chord</button></div>
+			<div id="p3"><button id="pre3" class="preset checker" hidden></button><button id="setpre3" class="setpreset checker">Click here to assign a chord</button></div>
+			<div id="p4"><button id="pre4" class="preset" hidden></button><button id="setpre4" class="setpreset">Click here to assign a chord</button></div>
+			<div id="p5"><button id="pre5" class="preset checker" hidden></button><button id="setpre5" class="setpreset checker">Click here to assign a chord</button></div>
+			<div id="p6"><button id="pre6" class="preset" hidden></button><button id="setpre6" class="setpreset">Click here to assign a chord</button></div>
+			<div id="p7"><button id="pre7" class="preset checker" hidden></button><button id="setpre7" class="setpreset checker">Click here to assign a chord</button></div>
+			<div id="p8"><button id="pre8" class="preset" hidden></button><button id="setpre8" class="setpreset">Click here to assign a chord</button></div>
+			<div id="p9"><button id="pre9" class="preset checker" hidden></button><button id="setpre9" class="setpreset checker">Click here to assign a chord</button></div>
 		</div>
 	</body>
 	<script src="audiosynth.js"></script>
+	<script src="Chord.js"></script>
 	<script src="main.js"></script>
 </html>

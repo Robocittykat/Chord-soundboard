@@ -3,7 +3,22 @@ let hs = 2**(1/12)
 let ws = 2**(1/6)
 let letters = {'C':261.63,'C#':277.18,'D':293.66,'D#':311.13,'E':329.63,'F':349.23,'F#':369.99,'G':392.00,'G#':415.30,'A':440.00,'A#':466.16,'B':493.88}
 
+let choosing = false;
+
+function $(elem){
+	return document.getElementById(elem)
+}
+
+for(let i = 0; i <= 9; i++){
+	$("setpre"+i).addEventListener("click",()=>{setPreset(i)})
+}
+
+
 function playChord(startFreq,type,octave){
+	if(choosing != false){
+		$("pre" + num).addEventListener("click",()=>{playChord(startFreq,type,octave)})
+	}
+	
     octave = octaveSlide.value
 	if(typeof startFreq == 'string'){
 		startFreq = letters[startFreq]
@@ -52,6 +67,13 @@ function playChord(startFreq,type,octave){
 		Synth.play(inst,i,4,1)
 	}
 	
+}
+
+function setPreset(num){
+	choosing = num;
+	$("pre" + num).hidden = false;
+	$("setpre" + num).style.width = "20%";
+	$("setpre" + num).style.left = "80%";
 }
 
 function update(){
