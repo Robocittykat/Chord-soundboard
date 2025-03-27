@@ -1,3 +1,49 @@
+//localStorage, to save presets and custom chords
+function save(){
+	localStorage.setItem("presets",stringJSON(presets))
+}
+
+function load(){
+	presets = destringJSON(localStorage.presets)
+	for(i in presets){
+		if(typeof presets[i] == 'object' && presets[i] != null){
+			presets[i] = new Chord(presets[i])
+			choose(presets[i],i)
+		}
+	}
+}
+
+//helper functions (things that are more related to javasctipt itself than music)
+function $(elem){ //a shorter name than document.getElementById(elem)
+	return document.getElementById(elem)
+}
+
+function stringJSON(oldJSON){ //modified from Robocittykat (me), base incremental 2.0
+	let newJSON = {}
+	for(let key in oldJSON){
+		if(typeof oldJSON[key] == "object" && oldJSON[key] != null){
+			newJSON[key] = stringJSON(oldJSON[key])
+		}else{
+			newJSON[key] = oldJSON[key]
+		}
+	}
+	newJSON = JSON.stringify(newJSON)
+	return newJSON
+}
+function destringJSON(oldJSON){ //modified from Robocittykat (me), base incremental 2.0
+	oldJSON = JSON.parse(oldJSON)
+	for(i in oldJSON){
+		if(typeof oldJSON[i] == 'string'){
+			if(oldJSON[i][0] == '{'){//hopefully that means its a json :) (probably not because JSONs hate me >:(  )
+				oldJSON[i] = destringJSON(oldJSON[i])
+			}
+		}
+	}return oldJSON
+}
+
+
+
+
 let inst = 2 // 0: piano; 1: organ; 2: guitar; 3: edm (Keith Horwitz)
 let hs = 2**(1/12) //half step
 let ws = 2**(1/6) //whole step
@@ -11,32 +57,28 @@ let choosing = false;
 	for(let i = 0; i <= 9; i++){
 		$("setpre"+i).addEventListener("click",()=>{setPreset(i)})
 	}
-
-function $(elem){ //a shorter name than document.getElementById(elem)
-	return document.getElementById(elem)
+let presets = {
+	0:null,
+	1:null,
+	2:null,
+	3:null,
+	4:null,
+	5:null,
+	6:null,
+	7:null,
+	8:null,
+	9:null,
 }
 
 
 
 
+
+
+
 function playChord(startFreq,type,octave = octaveSlide.value){
-	console.log(startFreq)
-	console.log(octave)
 	
-	if(choosing != false || choosing === 0){ //javascript considers 0 and false to be equal, but I need them to be different.
-		if(typeof(startFreq) != 'string'){
-			startFreq = freq[startFreq]
-		}
-		let startF = startFreq
-		$("pre" + choosing).onclick = ()=>{playChord(startF,type,octave)};
-		let toName = startFreq
-		
-		toName += type
-		toName += octave
-		$("pre" + choosing).innerHTML = toName
-		choose()
-		
-	}
+	
 	
 	if(typeof startFreq == 'string'){
 		startFreq = letters[startFreq]
@@ -81,6 +123,20 @@ function playChord(startFreq,type,octave = octaveSlide.value){
 		
 	}
 	
+	if(choosing != false || choosing === 0){ //javascript considers 0 and false to be equal, but I need them to be different.
+		if(typeof(startFreq) != 'string'){
+			startFreq = freq[startFreq]
+		}
+		let toName = startFreq
+		
+		toName += type
+		toName += octave
+		$("pre" + choosing).innerHTML = toName
+		presets[choosing] = (new Chord(toName,notes))
+		choose(presets[choosing])
+		
+	}
+	
 	for(i of notes){
 		Synth.play(inst,i,4,1)
 	}
@@ -96,14 +152,30 @@ function setPreset(num){
 		choosing = false;
 	}
 	
-}function choose(){
-	$("setpre" + choosing).innerHTML = "Click here to assign a chord"
-	$("pre" + choosing).hidden = false;
-	$("setpre" + choosing).style.width = "20%";
-	$("setpre" + choosing).style.left = "80%";
+}function choose(chord, which = choosing){
+	if(which === false){return}
+	
+	$("pre" + which).innerHTML = chord.name
+	//$("pre" + which).onclick = ()=>{presets[which].play}
+	$("setpre" + which).innerHTML = "Click here to assign a chord"
+	$("pre" + which).hidden = false;
+	$("setpre" + which).style.width = "20%";
+	$("setpre" + which).style.left = "80%";
 	choosing = false;
+	save();
 }
 
 function update(){
 	octave.innerHTML = octaveSlide.value
 }setInterval(update,0)
+
+
+
+
+
+
+
+
+
+
+load();

@@ -189,20 +189,20 @@
 				<td><button class="soundboard" onmousedown="playChord('B','sus')">Bsus</button></td>
 			</tr>
 		</table>
-		<text>octave: <span id="octave">4</span></text><input id="octaveSlide" type="range" min="2" max="6" value="4">
-		<text>keep notes in octave:</text><input type="checkbox" id="invertable">
+		<text>octave: <span id="octave">4</span></text><input id="octaveSlide" type="range" min="2" max="6" value="4"><br>
+		<text>keep notes in octave:</text><input type="checkbox" id="invertable"><br>
 		<text>inversion: </text>
 		<div id="presets">
-			<div id="p0"><button id="pre0" class="preset" hidden></button><button id="setpre0" class="setpreset" onclick>Click here to assign a chord</button></div>
-			<div id="p1"><button id="pre1" class="preset checker" hidden></button><button id="setpre1" class="setpreset checker" onclick>Click here to assign a chord</button></div>
-			<div id="p2"><button id="pre2" class="preset" hidden></button><button id="setpre2" class="setpreset" onclick>Click here to assign a chord</button></div>
-			<div id="p3"><button id="pre3" class="preset checker" hidden></button><button id="setpre3" class="setpreset checker" onclick>Click here to assign a chord</button></div>
-			<div id="p4"><button id="pre4" class="preset" hidden></button><button id="setpre4" class="setpreset" onclick>Click here to assign a chord</button></div>
-			<div id="p5"><button id="pre5" class="preset checker" hidden></button><button id="setpre5" class="setpreset checker" onclick>Click here to assign a chord</button></div>
-			<div id="p6"><button id="pre6" class="preset" hidden></button><button id="setpre6" class="setpreset" onclick>Click here to assign a chord</button></div>
-			<div id="p7"><button id="pre7" class="preset checker" hidden></button><button id="setpre7" class="setpreset checker" onclick>Click here to assign a chord</button></div>
-			<div id="p8"><button id="pre8" class="preset" hidden></button><button id="setpre8" class="setpreset" onclick>Click here to assign a chord</button></div>
-			<div id="p9"><button id="pre9" class="preset checker" hidden></button><button id="setpre9" class="setpreset checker" onclick>Click here to assign a chord</button></div>
+			<div id="p0"><button id="pre0" class="preset" hidden onclick="presets[0].play()"></button><button id="setpre0" class="setpreset">Click here to assign a chord</button></div>
+			<div id="p1"><button id="pre1" class="preset checker" hidden onclick></button><button id="setpre1" class="setpreset checker">Click here to assign a chord</button></div>
+			<div id="p2"><button id="pre2" class="preset" hidden onclick></button><button id="setpre2" class="setpreset">Click here to assign a chord</button></div>
+			<div id="p3"><button id="pre3" class="preset checker" hidden onclick></button><button id="setpre3" class="setpreset checker">Click here to assign a chord</button></div>
+			<div id="p4"><button id="pre4" class="preset" hidden onclick></button><button id="setpre4" class="setpreset">Click here to assign a chord</button></div>
+			<div id="p5"><button id="pre5" class="preset checker" hidden onclick></button><button id="setpre5" class="setpreset checker">Click here to assign a chord</button></div>
+			<div id="p6"><button id="pre6" class="preset" hidden onclick></button><button id="setpre6" class="setpreset">Click here to assign a chord</button></div>
+			<div id="p7"><button id="pre7" class="preset checker" hidden onclick></button><button id="setpre7" class="setpreset checker">Click here to assign a chord</button></div>
+			<div id="p8"><button id="pre8" class="preset" hidden onclick></button><button id="setpre8" class="setpreset">Click here to assign a chord</button></div>
+			<div id="p9"><button id="pre9" class="preset checker" hidden onclick></button><button id="setpre9" class="setpreset checker">Click here to assign a chord</button></div>
 		</div>
 	</body>
 	<script src="audiosynth.js"></script>
