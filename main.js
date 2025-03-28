@@ -170,7 +170,13 @@ function update(){
 }setInterval(update,0)
 
 
-
+function tab(tab){
+	tabs = [soundboardTab,presetTab];
+	for(i of tabs){
+		i.hidden = true;
+	}
+	$()
+}
 
 
 
