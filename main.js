@@ -175,8 +175,69 @@ function tab(tab){
 	for(i of tabs){
 		i.hidden = true;
 	}
-	$()
+	$(tab + "Tab").hidden = false;
 }
+
+
+
+
+
+
+let holdingKeys = []
+
+holdingKeys.contains = function(item){
+	if(holdingKeys.indexOf(item) >= 0){
+		return true
+	}else{
+		return false
+	}
+}
+
+
+document.onkeydown = function(key){
+	if(key.which >= 49 && key.which < (59) || key.which == 48){
+		which = key.which - 48
+		if(holdingKeys.contains(which)){
+			return
+		}
+		holdingKeys.unshift(which)
+		presets[which].play()
+	}
+}
+document.onkeyup = function(key){
+	if(holdingKeys.contains(key.which - 48)){
+		holdingKeys.splice(holdingKeys.indexOf(key.which-48,1))
+	}
+}
+
+
+/*
+ch|cd
+0 |48
+1 |49
+2 |50
+3 |51
+4 |52
+5 |53
+6 |54
+7 |55
+8 |56
+9 |57
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
