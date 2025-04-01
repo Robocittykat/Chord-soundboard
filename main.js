@@ -57,6 +57,8 @@ let choosing = false;
 	for(let i = 0; i <= 9; i++){
 		$("setpre"+i).addEventListener("click",()=>{setPreset(i)})
 	}
+
+
 let presets = {
 	0:null,
 	1:null,
@@ -70,7 +72,20 @@ let presets = {
 	9:null,
 }
 
-
+let allPresets = {
+	empty: {
+		0:null,
+		1:null,
+		2:null,
+		3:null,
+		4:null,
+		5:null,
+		6:null,
+		7:null,
+		8:null,
+		9:null,
+	}
+}
 
 
 
@@ -163,6 +178,18 @@ function setPreset(num){
 	$("setpre" + which).style.left = "80%";
 	choosing = false;
 	save();
+}
+
+function savePre(){
+	if(preName.value == ''){
+		alert("Name the preset first!")
+		return
+	}
+	allPresets[preName.value] = destringJSON(stringJSON(presets)) //effectively duplicates a json, from what I can tell there is no convenient built-in method to do so
+	let newOpt = document.createElement("option")
+	newOpt.text = preName.value
+	preSelect.add(newOpt)
+	preName.value = ''
 }
 
 function update(){

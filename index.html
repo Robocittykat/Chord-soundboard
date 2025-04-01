@@ -41,6 +41,7 @@
 				height: 10vh;
 				background-color: lightGray;
 				font-family: times;
+				font-size: 20px;
 			}
 			.preset.checker{
 				background-color: darkGray;
@@ -200,9 +201,11 @@
 				<text>inversion: </text>-->
 			</div>
 			<div id="presetTab" hidden>
-				In-use preset: <select>
-					<option value="0"></option>
+				In-use preset: <select id="preSelect">
+					<option value="0">empty</option>
 				</select>
+				<button id="loadPreset" onclick="loadPre()">load</button><br>
+				<input type="text" id="preName" placeholder="preset name"><button id="savePreset" onclick="savePre()">save</button>
 			</div>
 		</div>
 		<div id="presets">
