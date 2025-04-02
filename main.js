@@ -1,9 +1,11 @@
 //localStorage, to save presets and custom chords
 function save(){
 	localStorage.setItem("presets",stringJSON(presets))
+	localStorage.setItem("allPresets",stringJSON(allPresets))
 }
 
 function load(){
+	if(localStorage.length == 0){return}
 	presets = destringJSON(localStorage.presets)
 	for(i in presets){
 		if(typeof presets[i] == 'object' && presets[i] != null){
@@ -11,6 +13,17 @@ function load(){
 			choose(presets[i],i)
 		}
 	}
+	
+	allPresets = destringJSON(localStorage.allPresets)
+	
+	preSelect.innerHTML = ''
+	for(i in allPresets){
+		let newOpt = document.createElement("option")
+		newOpt.text = i
+		preSelect.add(newOpt)
+		preName.value = ''
+	}
+	
 }
 
 //helper functions (things that are more related to javasctipt itself than music)
@@ -44,7 +57,7 @@ function destringJSON(oldJSON){ //modified from Robocittykat (me), base incremen
 
 
 
-let inst = 2 // 0: piano; 1: organ; 2: guitar; 3: edm (Keith Horwitz)
+let inst = 2 // 0: piano 1: organ 2: guitar 3: edm (Keith Horwitz)
 let hs = 2**(1/12) //half step
 let ws = 2**(1/6) //whole step
 let letters = {'C':261.63,'C#':277.18,'D':293.66,'D#':311.13,'E':329.63,'F':349.23,'F#':369.99,'G':392.00,'G#':415.30,'A':440.00,'A#':466.16,'B':493.88} //Keith Horwitz
@@ -53,7 +66,7 @@ let freq = {} //backwards mapping chart, for when I have the frequency but not t
 		freq[letters[i]] = i
 	}
 
-let choosing = false;
+let choosing = false
 	for(let i = 0; i <= 9; i++){
 		$("setpre"+i).addEventListener("click",()=>{setPreset(i)})
 	}
@@ -149,6 +162,7 @@ function playChord(startFreq,type,octave = octaveSlide.value){
 		$("pre" + choosing).innerHTML = toName
 		presets[choosing] = (new Chord(toName,notes))
 		choose(presets[choosing])
+		save()
 		
 	}
 	
@@ -161,10 +175,10 @@ function playChord(startFreq,type,octave = octaveSlide.value){
 function setPreset(num){
 	if(choosing === false){
 		$("setpre" + num).innerHTML = "(cancel)"
-		choosing = num;
+		choosing = num
 	}else{
 		$("setpre" + num).innerHTML = "Click here to assign a chord"
-		choosing = false;
+		choosing = false
 	}
 	
 }function choose(chord, which = choosing){
@@ -173,11 +187,11 @@ function setPreset(num){
 	$("pre" + which).innerHTML = chord.name
 	//$("pre" + which).onclick = ()=>{presets[which].play}
 	$("setpre" + which).innerHTML = "Click here to assign a chord"
-	$("pre" + which).hidden = false;
-	$("setpre" + which).style.width = "20%";
-	$("setpre" + which).style.left = "80%";
-	choosing = false;
-	save();
+	$("pre" + which).hidden = false
+	$("setpre" + which).style.width = "20%"
+	$("setpre" + which).style.left = "80%"
+	choosing = false
+	//save() //this was causing problems because choose() gets used in load(), which was causing ti to save while loading, causing problems.
 }
 
 function savePre(){
@@ -186,10 +200,44 @@ function savePre(){
 		return
 	}
 	allPresets[preName.value] = destringJSON(stringJSON(presets)) //effectively duplicates a json, from what I can tell there is no convenient built-in method to do so
-	let newOpt = document.createElement("option")
-	newOpt.text = preName.value
-	preSelect.add(newOpt)
-	preName.value = ''
+	preSelect.innerHTML = ''
+	for(i in allPresets){
+		let newOpt = document.createElement("option")
+		newOpt.text = i
+		preSelect.add(newOpt)
+		preName.value = ''
+	}
+	save()
+}
+
+function loadPre(){
+	let toLoad = allPresets[preSelect.value]
+	console.log(toLoad)
+	for(i in toLoad){
+		if(toLoad[i] == null){
+			$("pre" + i).innerHTML = toLoad[i]
+			$("pre" + i).hidden = true
+			$("setpre" + i).style.width = "100%"
+			$("setpre" + i).style.left = "0%"
+		}else{
+			
+			
+				choose(toLoad[i],i)
+			
+		}
+	}presets = destringJSON(stringJSON(toLoad))
+	reChord(presets)
+	save()
+}
+
+function reChord(preset){ //when JSON.stringifying an object (such as a chord), it is turned into a classless object, thus loosing all its methods. Therefore, this function will take a preset array and turn all of them back into chord class objects
+	for(i in preset){
+		if(preset[i] == null){
+			continue
+		}else{
+			preset[i] = new Chord(preset[i])
+		}
+	}
 }
 
 function update(){
@@ -198,11 +246,11 @@ function update(){
 
 
 function tab(tab){
-	tabs = [soundboardTab,presetTab];
+	tabs = [soundboardTab,presetTab]
 	for(i of tabs){
-		i.hidden = true;
+		i.hidden = true
 	}
-	$(tab + "Tab").hidden = false;
+	$(tab + "Tab").hidden = false
 }
 
 
@@ -272,4 +320,4 @@ ch|cd
 
 
 
-load();
+load()
