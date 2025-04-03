@@ -197,11 +197,10 @@
 					</tr>
 				</table>
 				<text>octave: <span id="octave">4</span></text><input id="octaveSlide" type="range" min="2" max="6" value="4"><br>
-				<!--<text>keep notes in octave:</text><input type="checkbox" id="invertable"><br>
-				<text>inversion: </text>-->
+				<text>keep notes in octave:</text><input type="checkbox" id="inOct" checked><br>
 			</div>
 			<div id="presetTab" hidden>
-				In-use preset: <select id="preSelect">
+				In-use preset: <select id="preSelect" style="width: 100px">
 					<option>empty</option>
 				</select>
 				<button id="loadPreset" onclick="loadPre()">load</button><br>

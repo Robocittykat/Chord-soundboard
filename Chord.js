@@ -2,7 +2,6 @@ class Chord{
 	
 	
 	constructor(name,...notes){
-		console.log(notes)
 		if(typeof name == 'object'){
 			this.name = name.name
 			this.notes = name.notes

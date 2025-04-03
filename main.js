@@ -151,6 +151,15 @@ function playChord(startFreq,type,octave = octaveSlide.value){
 		
 	}
 	
+	if(inOct.checked){
+		for(i in notes){
+			if(notes[i] > 493.88 * 2**(octave-4)){
+				notes[i] /= 2
+			}
+		}
+	}
+	
+	
 	if(choosing != false || choosing === 0){ //javascript considers 0 and false to be equal, but I need them to be different.
 		
 		
@@ -164,7 +173,7 @@ function playChord(startFreq,type,octave = octaveSlide.value){
 		let toName = startFreq
 		
 		toName += type
-		toName += octave
+		//toName += octave
 		$("pre" + choosing).innerHTML = toName
 		presets[choosing] = (new Chord(toName,notes))
 		choose(presets[choosing])
@@ -205,6 +214,10 @@ function savePre(){
 		alert("Name the preset first!")
 		return
 	}
+	if(preName.value == 'empty'){
+		alert("You can't name a preset 'empty'.")
+		return
+	}
 	allPresets[preName.value] = destringJSON(stringJSON(presets)) //effectively duplicates a json, from what I can tell there is no convenient built-in method to do so
 	preSelect.innerHTML = ''
 	for(i in allPresets){
@@ -218,7 +231,6 @@ function savePre(){
 
 function loadPre(){
 	let toLoad = allPresets[preSelect.value]
-	console.log(toLoad)
 	for(i in toLoad){
 		if(toLoad[i] == null){
 			$("pre" + i).innerHTML = toLoad[i]
