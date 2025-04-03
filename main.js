@@ -111,7 +111,7 @@ function playChord(startFreq,type,octave = octaveSlide.value){
 	if(typeof startFreq == 'string'){
 		startFreq = letters[startFreq]
 	}
-	
+	let noteFreq = startFreq
 	startFreq *= 2**(octave-4)
 	
 	notes = [startFreq,]
@@ -152,9 +152,15 @@ function playChord(startFreq,type,octave = octaveSlide.value){
 	}
 	
 	if(choosing != false || choosing === 0){ //javascript considers 0 and false to be equal, but I need them to be different.
+		
+		
+		
+		
 		if(typeof(startFreq) != 'string'){
-			startFreq = freq[startFreq]
+			startFreq = freq[noteFreq]
 		}
+		
+		
 		let toName = startFreq
 		
 		toName += type
@@ -272,11 +278,16 @@ holdingKeys.contains = function(item){
 document.onkeydown = function(key){
 	if(key.which >= 49 && key.which < (59) || key.which == 48){
 		which = key.which - 48
+		
 		if(holdingKeys.contains(which)){
 			return
 		}
 		holdingKeys.unshift(which)
-		presets[which].play()
+		if(which == 0){
+			presets[9].play()
+		}else{
+			presets[which - 1].play()
+		}
 	}
 }
 document.onkeyup = function(key){
