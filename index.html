@@ -2,6 +2,18 @@
 <html>
 	<head>
 		<style>
+			/*
+			CSS explanation:
+			The .soundboard class is for buttons on the soundboard tab.
+			.checker is for every other one to give it the checkerboard pattern.
+			#presets is the (unaptly named) sidebar.
+			The .setpreset class is for buttons to add chords to the sidebar.
+			The .preset class is for the shortcut buttons on the sidebar.
+			#pre_ is for each one to give them each their own height on the sidebar.
+			.pianoKey is for the buttons making up the piano.
+			.chosen is for pianoKeys that have been selected, and it turns them white to indicate their selection.
+			*/
+			
 			.soundboard{
 				width: 5vw;
 				height: 5vw;
@@ -102,13 +114,13 @@
 	</head>
 	<body style="overflow-x: hidden;">
 		<div id="mainWindow">
-			<div id="tabButtons">
+			<div id="tabButtons"> <!-- The buttons at the top of the page to switch tabs -->
 				<button id="soundboardTabButton" onclick="tab('soundboard')">Soundboard</button>
 				<button id="presetTabButton" onclick="tab('preset')">Presets</button>
 				<button id="customTabButton" onclick="tab('custom')">Custom Chords</button>
 			</div>
 			<div id="soundboardTab">
-				<table>
+				<table> <!-- the grid of buttons that make up the soundboard -->
 					<tr>
 						<td><button class="checker soundboard" onmousedown="playChord('C','maj')">Cmaj</button></td>
 						<td><button class="soundboard" onmousedown="playChord('C#','maj')">C♯maj<br>D♭maj</button></td>
@@ -208,6 +220,7 @@
 						<td><button class="soundboard" onmousedown="playChord('B','sus')">Bsus</button></td>
 					</tr>
 				</table>
+				<!-- other settings for that tab -->
 				<text>octave: <span id="octave">4</span></text><input id="octaveSlide" type="range" min="2" max="6" value="4"><br>
 				<text>keep notes in octave:</text><input type="checkbox" id="inOct" checked><br>
 			</div>
@@ -217,16 +230,16 @@
 				</select>
 				<button id="loadPreset" onclick="loadPre()">load</button><br>
 				<input type="text" id="preName" placeholder="preset name"><button id="savePreset" onclick="savePre()">save</button><br>
-				Instrument: <select id="instSelect">
+				<!--Instrument: <select id="instSelect">
 					<option value="0">Piano</option>
 					<option value="1">Organ</option>
 					<option value="2" selected="selected">Guitar</option>
 					<option value="3">EDM</option>
-				</select>
+				</select>--><!-- This worked, but the guitar is the only one that sounds all that good imo -->
 			</div>
 			<div id="customTab" hidden>
 				<br>
-				<div id="piano">
+				<div id="piano"> <!-- the piano -->
 					<button id="C0" onclick="chordKey('C',0)" class="pianoKey">C</button>
 					<button id="C#0" onclick="chordKey('C#',0)" class="pianoKey checker">C♯</button>
 					<button id="D0" onclick="chordKey('D',0)" class="pianoKey">D</button>
@@ -263,7 +276,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="presets">
+		<div id="presets"> <!-- poorly named, this is the sidebar. Each sub-div is a row. -->
 			<div id="p0"><button id="pre0" class="preset" hidden onmousedown="presets[0].play()"></button><button id="setpre0" class="setpreset">Click here to assign a chord</button></div>
 			<div id="p1"><button id="pre1" class="preset checker" hidden onmousedown="presets[1].play()"></button><button id="setpre1" class="setpreset checker">Click here to assign a chord</button></div>
 			<div id="p2"><button id="pre2" class="preset" hidden onmousedown="presets[2].play()"></button><button id="setpre2" class="setpreset">Click here to assign a chord</button></div>
@@ -276,6 +289,7 @@
 			<div id="p9"><button id="pre9" class="preset checker" hidden onmousedown="presets[9].play()"></button><button id="setpre9" class="setpreset checker">Click here to assign a chord</button></div>
 		</div>
 	</body>
+	<!-- scripts that get used -->
 	<script src="audiosynth.js"></script>
 	<script src="Chord.js"></script>
 	<script src="main.js"></script>

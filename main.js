@@ -1,10 +1,10 @@
 //localStorage, to save presets and custom chords
-function save(){
+function save(){ //saves everything that needs to be saved
 	localStorage.setItem("presets",stringJSON(presets))
 	localStorage.setItem("allPresets",stringJSON(allPresets))
 }
 
-function load(){
+function load(){ //loads everything that needs to be loaded.
 	if(localStorage.length == 0){return}
 	presets = destringJSON(localStorage.presets)
 	for(i in presets){
@@ -31,7 +31,7 @@ function $(elem){ //a shorter name than document.getElementById(elem)
 	return document.getElementById(elem)
 }
 
-function stringJSON(oldJSON){ //modified from Robocittykat (me), base incremental 2.0
+function stringJSON(oldJSON){ //JSON.stringify, the built-in function to turn a JSON into a string, is broken in that it deletes some entries in JSONs.
 	let newJSON = {}
 	for(let key in oldJSON){
 		if(typeof oldJSON[key] == "object" && oldJSON[key] != null){
@@ -43,7 +43,7 @@ function stringJSON(oldJSON){ //modified from Robocittykat (me), base incrementa
 	newJSON = JSON.stringify(newJSON)
 	return newJSON
 }
-function destringJSON(oldJSON){ //modified from Robocittykat (me), base incremental 2.0
+function destringJSON(oldJSON){ //Reverses stringJSON
 	oldJSON = JSON.parse(oldJSON)
 	for(i in oldJSON){
 		if(typeof oldJSON[i] == 'string'){
@@ -67,12 +67,12 @@ let freq = {} //backwards mapping chart, for when I have the frequency but not t
 	}
 
 let choosing = false
-	for(let i = 0; i <= 9; i++){
+	for(let i = 0; i <= 9; i++){ //adds the functionality to setPre_
 		$("setpre"+i).addEventListener("click",()=>{setPreset(i)})
 	}
 
 
-let presets = {
+let presets = { //The current sidebar
 	0:null,
 	1:null,
 	2:null,
@@ -85,7 +85,7 @@ let presets = {
 	9:null,
 }
 
-let allPresets = {
+let allPresets = { //Every saved preset
 	empty: {
 		0:null,
 		1:null,
@@ -104,19 +104,19 @@ let allPresets = {
 
 
 
-function playChord(startFreq,type,octave = octaveSlide.value){
+function playChord(startFreq,type,octave = octaveSlide.value){ //The function called by the soundboard buttons
 	
 	
 	
-	if(typeof startFreq == 'string'){
+	if(typeof startFreq == 'string'){ //if a string was inputted for startFreq, it turns it into an actual frequency.
 		startFreq = letters[startFreq]
 	}
-	let noteFreq = startFreq
-	startFreq *= 2**(octave-4)
+	let noteFreq = startFreq //saves the innitial value for later before modifying it
+	startFreq *= 2**(octave-4) //adjusts the frequency if the octave should shift it up
 	
 	notes = [startFreq,]
 	
-	switch(type){
+	switch(type){ //adds more notes based on the chord type
 		case "maj":
 			notes.push(startFreq*hs**4)
 			notes.push(startFreq*hs**7)
@@ -151,7 +151,7 @@ function playChord(startFreq,type,octave = octaveSlide.value){
 		
 	}
 	
-	if(inOct.checked){
+	if(inOct.checked){ //adjusts the frequencies if the user wants to keep notes in the octave
 		for(i in notes){
 			if(notes[i] > 493.88 * 2**(octave-4)){
 				notes[i] /= 2
@@ -166,11 +166,11 @@ function playChord(startFreq,type,octave = octaveSlide.value){
 		
 		
 		if(typeof(startFreq) != 'string'){
-			startFreq = freq[noteFreq]
+			startFreq = freq[noteFreq] //set startFreq to the note name
 		}
 		
 		
-		let toName = startFreq
+		let toName = startFreq //create the name of the chord
 		
 		toName += type
 		//toName += octave
@@ -181,13 +181,13 @@ function playChord(startFreq,type,octave = octaveSlide.value){
 		
 	}
 	
-	for(i of notes){
+	for(i of notes){ //play each chord
 		Synth.play(inst,i,4,1)
 	}
 	
 }
 
-function customPlay(chord){
+/*function customPlay(chord){ //add a custom chord. This was originally 
 	chord.play()
 	if(choosing !== false){
 		$("pre" + choosing).innerHTML = chord.name
@@ -195,9 +195,9 @@ function customPlay(chord){
 		choose(presets[choosing])
 		save()
 	}
-}
+}*/
 
-function setPreset(num){
+function setPreset(num){ //when you click on the button to set a sidebar button
 	if(choosing === false){
 		$("setpre" + num).innerHTML = "(cancel)"
 		choosing = num
@@ -206,30 +206,28 @@ function setPreset(num){
 		choosing = false
 	}
 	
-}function choose(chord, which = choosing){
+}function choose(chord, which = choosing){ //when you pick a chord for the sidebar
 	if(which === false){return}
 	
 	$("pre" + which).innerHTML = chord.name
-	//$("pre" + which).onclick = ()=>{presets[which].play}
 	$("setpre" + which).innerHTML = "Click here to assign a chord"
 	$("pre" + which).hidden = false
 	$("setpre" + which).style.width = "20%"
 	$("setpre" + which).style.left = "80%"
 	choosing = false
-	//save() //this was causing problems because choose() gets used in load(), which was causing ti to save while loading, causing problems.
 }
 
-function savePre(){
+function savePre(){ //save a preset
 	if(preName.value == ''){
 		alert("Name the preset first!")
 		return
 	}
 	if(preName.value == 'empty'){
-		alert("You can't name a preset 'empty'.")
+		alert("You can't name a preset 'empty'.") //because that would override the default preset
 		return
 	}
 	allPresets[preName.value] = destringJSON(stringJSON(presets)) //effectively duplicates a json, from what I can tell there is no convenient built-in method to do so
-	preSelect.innerHTML = ''
+	preSelect.innerHTML = '' //resets the options in the dropdown, and adds them all again in case you override a previous save.
 	for(i in allPresets){
 		let newOpt = document.createElement("option")
 		newOpt.text = i
@@ -239,7 +237,7 @@ function savePre(){
 	save()
 }
 
-function loadPre(){
+function loadPre(){ //to load a preset
 	let toLoad = allPresets[preSelect.value]
 	for(i in toLoad){
 		if(toLoad[i] == null){
@@ -248,17 +246,14 @@ function loadPre(){
 			$("setpre" + i).style.width = "100%"
 			$("setpre" + i).style.left = "0%"
 		}else{
-			
-			
-				choose(toLoad[i],i)
-			
+			choose(toLoad[i],i)
 		}
 	}presets = destringJSON(stringJSON(toLoad))
 	reChord(presets)
 	save()
 }
 
-function saveChord(){
+function saveChord(){ //saves a chord to the sidebar
 	
 	if(choosing === false){
 		alert("Pick a sidebar slot to assign the chord to first!")
@@ -274,7 +269,7 @@ function saveChord(){
 	notes = []
 	for(i of elems){
 		let id = i.id
-		switch(true){
+		switch(true){ //figures out what note
 			case id.includes('C#'):
 				note = 'C#'
 				break
@@ -312,7 +307,7 @@ function saveChord(){
 				note = 'B'
 				break
 		}
-		switch(true){
+		switch(true){ //figures out what octave
 			case id.includes('0'):
 				oct = 0
 				break
@@ -345,14 +340,14 @@ function reChord(preset){ //when JSON.stringifying an object (such as a chord), 
 	}
 }
 
-function update(){
+function update(){ //updates page info asap
 	octave.innerHTML = octaveSlide.value
 	octave2.innerHTML = octaveSlide2.value
 	inst = instSelect.value
 }setInterval(update,0)
 
 
-function tab(tab){
+function tab(tab){ //switch tab
 	tabs = [soundboardTab,presetTab,customTab]
 	for(i of tabs){
 		i.hidden = true
@@ -381,7 +376,7 @@ ch|cd
 
 let holdingKeys = []
 
-holdingKeys.contains = function(item){
+holdingKeys.contains = function(item){ //this function is mostly unneccesary, but I got this code from a previous project
 	if(holdingKeys.indexOf(item) >= 0){
 		return true
 	}else{
@@ -390,7 +385,7 @@ holdingKeys.contains = function(item){
 }
 
 
-document.onkeydown = function(key){
+document.onkeydown = function(key){ //when you press a number key
 	if(key.which >= 49 && key.which < (59) || key.which == 48){
 		which = key.which - 48
 		
@@ -411,7 +406,7 @@ document.onkeyup = function(key){ //W3 schools
 	}
 }
 
-function chordKey(note,oct){
+function chordKey(note,oct){ //when you press a piano key
 	Synth.play(inst,letters[note],octaveSlide2.value*1+oct,1)
 	if($(note+oct).classList.contains("chosen")){
 		$(note+oct).classList.remove("chosen")
@@ -419,7 +414,7 @@ function chordKey(note,oct){
 		$(note+oct).classList.add("chosen")
 	}
 }
-function testChord(){
+function testChord(){ //when you test the custom chord
 	elems = document.getElementsByClassName("chosen")
 	for(i of elems){
 		let id = i.id
