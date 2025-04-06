@@ -189,7 +189,12 @@ function playChord(startFreq,type,octave = octaveSlide.value){
 
 function customPlay(chord){
 	chord.play()
-	
+	if(choosing !== false){
+		$("pre" + choosing).innerHTML = chord.name
+		presets[choosing] = (chord)
+		choose(presets[choosing])
+		save()
+	}
 }
 
 function setPreset(num){
@@ -254,7 +259,12 @@ function loadPre(){
 }
 
 function saveChord(){
-	if(customName.value == ''){return}
+	
+	if(choosing === false){
+		alert("Pick a sidebar slot to assign the chord to first!")
+		return
+	}
+	
 	
 	toElems = document.getElementsByClassName("chosen")
 	elems = []
@@ -313,13 +323,15 @@ function saveChord(){
 		notes.unshift(letters[note] * 2**oct)
 		i.classList.remove('chosen')
 	}
-	newChord = document.createElement("button")
-	newChord.classList.add("soundboard")
-	newChord.onclick = ()=>customPlay(new Chord(customName.value,notes))
-	newChord.innerHTML = customName.value
-	customChords.appendChild(newChord)
-	console.log(new Chord(customName.value,notes))
-	new Chord(customName.value,notes).play()
+	toSave = new Chord(customName.value,notes)
+	console.log(toSave)
+	toSave.play()
+	
+	$("pre" + choosing).innerHTML = toSave.name
+	presets[choosing] = toSave
+	choose(presets[choosing])
+	save()
+	
 	customName.value = ''
 }
 
