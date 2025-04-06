@@ -87,6 +87,17 @@
 				top: 90%;
 				position: absolute;
 			}
+			.pianoKey{
+				width: 2.5%;
+				background-color: lightGray;
+				height: 200px;
+			}
+			.pianoKey.checker{
+				background-color: darkGray;
+			}
+			.pianoKey.chosen{
+				background-color: white;
+			}
 		</style>
 	</head>
 	<body style="overflow-x: hidden;">
@@ -94,6 +105,7 @@
 			<div id="tabButtons">
 				<button id="soundboardTabButton" onclick="tab('soundboard')">Soundboard</button>
 				<button id="presetTabButton" onclick="tab('preset')">Presets</button>
+				<button id="customTabButton" onclick="tab('custom')">Custom Chords</button>
 			</div>
 			<div id="soundboardTab">
 				<table>
@@ -205,6 +217,43 @@
 				</select>
 				<button id="loadPreset" onclick="loadPre()">load</button><br>
 				<input type="text" id="preName" placeholder="preset name"><button id="savePreset" onclick="savePre()">save</button>
+			</div>
+			<div id="customTab" hidden>
+				<br>
+				<div id="piano">
+					<button id="C0" onclick="chordKey('C',0)" class="pianoKey">C</button>
+					<button id="C#0" onclick="chordKey('C#',0)" class="pianoKey checker">C♯</button>
+					<button id="D0" onclick="chordKey('D',0)" class="pianoKey">D</button>
+					<button id="D#0" onclick="chordKey('D#',0)" class="pianoKey checker">D♯</button>
+					<button id="E0" onclick="chordKey('E',0)" class="pianoKey">E</button>
+					<button id="F0" onclick="chordKey('F',0)" class="pianoKey">F</button>
+					<button id="F#0" onclick="chordKey('F#',0)" class="pianoKey checker">F♯</button>
+					<button id="G0" onclick="chordKey('G',0)" class="pianoKey">G</button>
+					<button id="G#0" onclick="chordKey('G#',0)" class="pianoKey checker">G♯</button>
+					<button id="A0" onclick="chordKey('A',0)" class="pianoKey">A</button>
+					<button id="A#0" onclick="chordKey('A#',0)" class="pianoKey checker">A♯</button>
+					<button id="B0" onclick="chordKey('B',0)" class="pianoKey">B</button>
+					<button id="C1" onclick="chordKey('C',1)" class="pianoKey">C</button>
+					<button id="C#1" onclick="chordKey('C#',1)" class="pianoKey checker">C♯</button>
+					<button id="D1" onclick="chordKey('D',1)" class="pianoKey">D</button>
+					<button id="D#1" onclick="chordKey('D#',1)" class="pianoKey checker">D♯</button>
+					<button id="E1" onclick="chordKey('E',1)" class="pianoKey">E</button>
+					<button id="F1" onclick="chordKey('F',1)" class="pianoKey">F</button>
+					<button id="F#1" onclick="chordKey('F#',1)" class="pianoKey checker">F♯</button>
+					<button id="G1" onclick="chordKey('G',1)" class="pianoKey">G</button>
+					<button id="G#1" onclick="chordKey('G#',1)" class="pianoKey checker">G♯</button>
+					<button id="A1" onclick="chordKey('A',1)" class="pianoKey">A</button>
+					<button id="A#1" onclick="chordKey('A#',1)" class="pianoKey checker">A♯</button>
+					<button id="B1" onclick="chordKey('B',1)" class="pianoKey">B</button>
+				</div>
+				<br>
+				<button onclick="testChord()">Test</button>
+				<input type="text" id="customName" placeholder="chord name">
+				<button onclick="saveChord()">Save</button>
+				<br>
+				<div id="customChords">
+					
+				</div>
 			</div>
 		</div>
 		<div id="presets">

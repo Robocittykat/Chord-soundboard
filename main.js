@@ -187,6 +187,11 @@ function playChord(startFreq,type,octave = octaveSlide.value){
 	
 }
 
+function customPlay(chord){
+	chord.play()
+	
+}
+
 function setPreset(num){
 	if(choosing === false){
 		$("setpre" + num).innerHTML = "(cancel)"
@@ -248,6 +253,76 @@ function loadPre(){
 	save()
 }
 
+function saveChord(){
+	if(customName.value == ''){return}
+	
+	toElems = document.getElementsByClassName("chosen")
+	elems = []
+	for(let j of toElems){
+		elems.unshift(j)
+	}
+	notes = []
+	for(i of elems){
+		let id = i.id
+		switch(true){
+			case id.includes('C#'):
+				note = 'C#'
+				break
+			case id.includes('C'):
+				note = 'C'
+				break
+			case id.includes('D#'):
+				note = 'D#'
+				break
+			case id.includes('D'):
+				note = 'D'
+				break
+			case id.includes('E'):
+				note = 'E'
+				break
+			case id.includes('F#'):
+				note = 'F#'
+				break
+			case id.includes('F'):
+				note = 'F'
+				break
+			case id.includes('G#'):
+				note = 'G#'
+				break
+			case id.includes('G'):
+				note = 'G'
+				break
+			case id.includes('A#'):
+				note = 'A#'
+				break
+			case id.includes('A'):
+				note = 'A'
+				break
+			case id.includes('B'):
+				note = 'B'
+				break
+		}
+		switch(true){
+			case id.includes('0'):
+				oct = 0
+				break
+			case id.includes('1'):
+				oct = 1
+				break
+		}
+		notes.unshift(letters[note] * 2**oct)
+		i.classList.remove('chosen')
+	}
+	newChord = document.createElement("button")
+	newChord.classList.add("soundboard")
+	newChord.onclick = ()=>customPlay(new Chord(customName.value,notes))
+	newChord.innerHTML = customName.value
+	customChords.appendChild(newChord)
+	console.log(new Chord(customName.value,notes))
+	new Chord(customName.value,notes).play()
+	customName.value = ''
+}
+
 function reChord(preset){ //when JSON.stringifying an object (such as a chord), it is turned into a classless object, thus loosing all its methods. Therefore, this function will take a preset array and turn all of them back into chord class objects
 	for(i in preset){
 		if(preset[i] == null){
@@ -264,7 +339,7 @@ function update(){
 
 
 function tab(tab){
-	tabs = [soundboardTab,presetTab]
+	tabs = [soundboardTab,presetTab,customTab]
 	for(i of tabs){
 		i.hidden = true
 	}
@@ -274,6 +349,20 @@ function tab(tab){
 
 
 
+
+/*
+ch|cd
+0 |48
+1 |49
+2 |50
+3 |51
+4 |52
+5 |53
+6 |54
+7 |55
+8 |56
+9 |57
+*/
 
 
 let holdingKeys = []
@@ -302,26 +391,75 @@ document.onkeydown = function(key){
 		}
 	}
 }
-document.onkeyup = function(key){
+document.onkeyup = function(key){ //W3 schools
 	if(holdingKeys.contains(key.which - 48)){
 		holdingKeys.splice(holdingKeys.indexOf(key.which-48,1))
 	}
 }
 
+function chordKey(note,oct){
+	Synth.play(inst,letters[note],4+oct,1)
+	if($(note+oct).classList.contains("chosen")){
+		$(note+oct).classList.remove("chosen")
+	}else{
+		$(note+oct).classList.add("chosen")
+	}
+}
+function testChord(){
+	elems = document.getElementsByClassName("chosen")
+	for(i of elems){
+		let id = i.id
+		switch(true){
+			case id.includes('C#'):
+				note = 'C#'
+				break
+			case id.includes('C'):
+				note = 'C'
+				break
+			case id.includes('D#'):
+				note = 'D#'
+				break
+			case id.includes('D'):
+				note = 'D'
+				break
+			case id.includes('E'):
+				note = 'E'
+				break
+			case id.includes('F#'):
+				note = 'F#'
+				break
+			case id.includes('F'):
+				note = 'F'
+				break
+			case id.includes('G#'):
+				note = 'G#'
+				break
+			case id.includes('G'):
+				note = 'G'
+				break
+			case id.includes('A#'):
+				note = 'A#'
+				break
+			case id.includes('A'):
+				note = 'A'
+				break
+			case id.includes('B'):
+				note = 'B'
+				break
+		}
+		switch(true){
+			case id.includes('0'):
+				oct = 0
+				break
+			case id.includes('1'):
+				oct = 1
+				break
+		}
+		Synth.play(inst,letters[note],4+oct,1)
+		console.log(id)
+	}
+}
 
-/*
-ch|cd
-0 |48
-1 |49
-2 |50
-3 |51
-4 |52
-5 |53
-6 |54
-7 |55
-8 |56
-9 |57
-*/
 
 
 
