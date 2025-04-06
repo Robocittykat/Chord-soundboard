@@ -216,7 +216,13 @@
 					<option>empty</option>
 				</select>
 				<button id="loadPreset" onclick="loadPre()">load</button><br>
-				<input type="text" id="preName" placeholder="preset name"><button id="savePreset" onclick="savePre()">save</button>
+				<input type="text" id="preName" placeholder="preset name"><button id="savePreset" onclick="savePre()">save</button><br>
+				Instrument: <select id="instSelect">
+					<option value="0">Piano</option>
+					<option value="1">Organ</option>
+					<option value="2" selected="selected">Guitar</option>
+					<option value="3">EDM</option>
+				</select>
 			</div>
 			<div id="customTab" hidden>
 				<br>
@@ -246,6 +252,7 @@
 					<button id="A#1" onclick="chordKey('A#',1)" class="pianoKey checker">A♯</button>
 					<button id="B1" onclick="chordKey('B',1)" class="pianoKey">B</button>
 				</div>
+				<text>octave: <span id="octave2">4</span></text><input id="octaveSlide2" type="range" min="2" max="6" value="4"><br>
 				<br>
 				<button onclick="testChord()">Test</button>
 				<input type="text" id="customName" placeholder="chord name">

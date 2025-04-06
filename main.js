@@ -320,7 +320,7 @@ function saveChord(){
 				oct = 1
 				break
 		}
-		notes.unshift(letters[note] * 2**oct)
+		notes.unshift(letters[note] * 2**(oct+octaveSlide2.value-4))
 		i.classList.remove('chosen')
 	}
 	toSave = new Chord(customName.value,notes)
@@ -347,6 +347,8 @@ function reChord(preset){ //when JSON.stringifying an object (such as a chord), 
 
 function update(){
 	octave.innerHTML = octaveSlide.value
+	octave2.innerHTML = octaveSlide2.value
+	inst = instSelect.value
 }setInterval(update,0)
 
 
@@ -410,7 +412,7 @@ document.onkeyup = function(key){ //W3 schools
 }
 
 function chordKey(note,oct){
-	Synth.play(inst,letters[note],4+oct,1)
+	Synth.play(inst,letters[note],octaveSlide2.value*1+oct,1)
 	if($(note+oct).classList.contains("chosen")){
 		$(note+oct).classList.remove("chosen")
 	}else{
@@ -467,7 +469,7 @@ function testChord(){
 				oct = 1
 				break
 		}
-		Synth.play(inst,letters[note],4+oct,1)
+		Synth.play(inst,letters[note],octaveSlide2.value*1+oct,1)
 		console.log(id)
 	}
 }
