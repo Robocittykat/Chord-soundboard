@@ -343,7 +343,7 @@ function reChord(preset){ //when JSON.stringifying an object (such as a chord), 
 function update(){ //updates page info asap
 	octave.innerHTML = octaveSlide.value
 	octave2.innerHTML = octaveSlide2.value
-	inst = instSelect.value
+	//inst = instSelect.value
 }setInterval(update,0)
 
 
